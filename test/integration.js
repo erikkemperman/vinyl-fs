@@ -1,5 +1,6 @@
 'use strict';
 
+var os = require('os');
 var path = require('path');
 
 var fs = require('graceful-fs');
@@ -23,6 +24,9 @@ var inputDirpath = testConstants.inputDirpath;
 var outputDirpath = testConstants.outputDirpath;
 var symlinkDirpath = testConstants.symlinkDirpath;
 var inputBase = path.join(base, './in/');
+var inputDirpath = testConstants.inputDirpath;
+var outputDirpath = testConstants.outputDirpath;
+var symlinkDirpath = testConstants.symlinkDirpath;
 var inputGlob = path.join(inputBase, './*.txt');
 var outputBase = path.join(base, './out/');
 var outputSymlink = path.join(symlinkDirpath, './foo');
@@ -30,6 +34,8 @@ var outputDirpathSymlink = path.join(outputDirpath, './foo');
 var content = testConstants.content;
 
 var clean = cleanup(base);
+
+var isWindows = (os.platform() === 'win32');
 
 describe('integrations', function() {
 
@@ -58,7 +64,7 @@ describe('integrations', function() {
     ], done);
   });
 
-  it('(*nix) sources a directory, creates a symlink and copies the symlink', function(done) {
+  it('(*nix) sources a directory, creates a symlink and copies it', function(done) {
     if (isWindows) {
       this.skip();
       return;
@@ -70,6 +76,8 @@ describe('integrations', function() {
 
       expect(symlinkResult).toEqual(inputDirpath);
       expect(destResult).toEqual(inputDirpath);
+      expect(files[0].stat).toExist();
+      expect(files[0].stat.isSymbolicLink()).toBe(true);
       expect(files[0].symlink).toEqual(inputDirpath);
     }
 
@@ -81,7 +89,7 @@ describe('integrations', function() {
     ], done);
   });
 
-  it('(windows) sources a directory, creates a junction and copies the junction', function(done) {
+  it('(windows) sources a directory, creates a junction and copies it', function(done) {
     if (!isWindows) {
       this.skip();
       return;
@@ -95,6 +103,8 @@ describe('integrations', function() {
 
       expect(symlinkResult).toEqual(expected);
       expect(destResult).toEqual(expected);
+      expect(files[0].stat).toExist();
+      expect(files[0].stat.isSymbolicLink()).toBe(true);
       expect(files[0].symlink).toEqual(inputDirpath);
     }
 

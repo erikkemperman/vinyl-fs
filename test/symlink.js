@@ -10,9 +10,7 @@ var miss = require('mississippi');
 var vfs = require('../');
 
 var cleanup = require('./utils/cleanup');
-var statMode = require('./utils/stat-mode');
 var isWindows = require('./utils/is-windows');
-var applyUmask = require('./utils/apply-umask');
 var testStreams = require('./utils/test-streams');
 var isDirectory = require('./utils/is-directory-mock');
 var testConstants = require('./utils/test-constants');
@@ -111,6 +109,8 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
+      expect(files[0].stat).toExist('stat should be set');
+      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
       expect(outputLink).toEqual(inputPath);
     }
 
@@ -144,6 +144,8 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
+      expect(files[0].stat).toExist('stat should be set');
+      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
       expect(outputLink).toEqual(inputPath);
     }
 
@@ -170,6 +172,8 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
+      expect(files[0].stat).toExist('stat should be set');
+      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
       expect(outputLink).toEqual(inputPath);
     }
 
@@ -195,6 +199,8 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
+      expect(files[0].stat).toExist('stat should be set');
+      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
       expect(outputLink).toEqual(path.normalize('../fixtures/test.txt'));
     }
 
@@ -220,6 +226,8 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
+      expect(files[0].stat).toExist('stat should be set');
+      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
       expect(outputLink).toEqual(inputPath);
     }
 
@@ -260,7 +268,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -297,7 +305,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -335,7 +343,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -372,7 +380,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -415,7 +423,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -452,7 +460,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -520,7 +528,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -542,35 +550,6 @@ describe('symlink stream', function() {
     pipe([
       from.obj([file]),
       vfs.symlink(outputBase, { useJunctions: false, relativeSymlinks: true }),
-      concat(assert),
-    ], done);
-  });
-
-  it('uses different modes for files and directories', function(done) {
-    // Changing the mode of a file is not supported by node.js in Windows.
-    if (isWindows) {
-      this.skip();
-      return;
-    }
-
-    var dirMode = applyUmask('722');
-    var fileMode = applyUmask('700');
-
-    var file = new File({
-      base: inputBase,
-      path: inputPath,
-      contents: null,
-    });
-
-    function assert(files) {
-      expect(statMode(outputDirpath)).toEqual(dirMode);
-      // TODO: the file doesn't actually get the mode updated
-      expect(files[0].stat.mode).toEqual(fileMode);
-    }
-
-    pipe([
-      from.obj([file]),
-      vfs.symlink(outputDirpath, { mode: fileMode, dirMode: dirMode }),
       concat(assert),
     ], done);
   });

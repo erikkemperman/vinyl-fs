@@ -1,7 +1,8 @@
 'use strict';
 
-function isSymbolic() {
-  return true;
+function mock(value) {
+  return function isSymbolicLink() {
+    return value;
+  };
 }
-
-module.exports = isSymbolic;
+module.exports = mock;

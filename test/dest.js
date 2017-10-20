@@ -368,7 +368,7 @@ describe('.dest()', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -828,7 +828,7 @@ describe('.dest()', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -851,7 +851,7 @@ describe('.dest()', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
         mode: applyUmask('000'),
       },
     });
@@ -876,7 +876,7 @@ describe('.dest()', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
       },
     });
 

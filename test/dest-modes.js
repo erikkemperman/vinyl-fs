@@ -135,7 +135,7 @@ describe('.dest() with custom modes', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
         mode: expectedMode,
       },
     });
@@ -164,7 +164,7 @@ describe('.dest() with custom modes', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
         mode: expectedMode,
       },
     });
@@ -251,7 +251,7 @@ describe('.dest() with custom modes', function() {
       base: inputBase,
       path: outputDirpath,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
         mode: startMode,
       },
     });
@@ -259,7 +259,7 @@ describe('.dest() with custom modes', function() {
       base: inputBase,
       path: outputDirpath,
       stat: {
-        isDirectory: isDirectory,
+        isDirectory: isDirectory(true),
         mode: expectedMode,
       },
     });

@@ -1,7 +1,8 @@
 'use strict';
 
-function isDirectory() {
-  return true;
+function mock(value) {
+  return function isDirectory() {
+    return value;
+  };
 }
-
-module.exports = isDirectory;
+module.exports = mock;

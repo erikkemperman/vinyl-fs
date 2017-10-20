@@ -45,7 +45,8 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(false),
       },
     });
 
@@ -58,6 +59,8 @@ describe('.dest() with symlinks', function() {
       expect(files.length).toEqual(1);
       expect(file.symlink).toEqual(symlink);
       expect(files[0].symlink).toEqual(symlink);
+      expect(files[0].stat).toExist();
+      expect(files[0].stat.isSymbolicLink()).toBe(true);
       expect(files[0].path).toEqual(outputPath);
     }
 
@@ -74,9 +77,8 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: function() {
-          return false;
-        },
+        isSymbolicLink: isSymbolicLink(false),
+        isDirectory: isDirectory(false),
       },
     });
 
@@ -103,13 +105,14 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(false),
       },
     });
 
     function assert(err) {
       expect(err).toExist();
-      // TODO: Should we assert anything else about this err?
+      expect(err.message).toEqual('Missing symlink property on symbolic vinyl');
       done();
     }
 
@@ -125,7 +128,8 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(false),
       },
     });
 
@@ -150,7 +154,8 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(false),
       },
     });
 
@@ -162,6 +167,8 @@ describe('.dest() with symlinks', function() {
 
       expect(files.length).toEqual(1);
       expect(outputLink).toEqual(path.normalize('../fixtures/test.txt'));
+      expect(files[0].stat).toExist();
+      expect(files[0].stat.isSymbolicLink()).toBe(true);
     }
 
     pipe([
@@ -182,7 +189,8 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -218,7 +226,8 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -255,7 +264,8 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -291,7 +301,8 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -333,7 +344,8 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -370,7 +382,8 @@ describe('.dest() with symlinks', function() {
       path: neInputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -398,7 +411,7 @@ describe('.dest() with symlinks', function() {
   });
 
   // This could also be from a different Vinyl adapter
-  it('(windows) receives a virtual sybolic directory and creates a junction', function(done) {
+  it('(windows) receives a virtual symbolic directory and creates a junction', function(done) {
     if (!isWindows) {
       this.skip();
       return;
@@ -409,7 +422,8 @@ describe('.dest() with symlinks', function() {
       path: neInputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -448,7 +462,8 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -485,7 +500,8 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(false),
       },
     });
 
@@ -518,7 +534,8 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(true),
       },
     });
 
@@ -554,7 +571,8 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(false),
       },
     });
 
@@ -588,7 +606,8 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(false),
       },
     });
 
@@ -621,7 +640,8 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(false),
       },
     });
 
@@ -659,7 +679,8 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink,
+        isSymbolicLink: isSymbolicLink(true),
+        isDirectory: isDirectory(false),
       },
     });
 
