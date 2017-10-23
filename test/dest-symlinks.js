@@ -46,7 +46,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(false),
       },
     });
 
@@ -78,7 +77,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(false),
-        isDirectory: isDirectory(false),
       },
     });
 
@@ -106,7 +104,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(false),
       },
     });
 
@@ -129,7 +126,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(false),
       },
     });
 
@@ -155,7 +151,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(false),
       },
     });
 
@@ -190,7 +185,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(true),
       },
     });
 
@@ -227,7 +221,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(true),
       },
     });
 
@@ -265,7 +258,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(true),
       },
     });
 
@@ -302,7 +294,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(true),
       },
     });
 
@@ -345,7 +336,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(true),
       },
     });
 
@@ -383,7 +373,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(true),
       },
     });
 
@@ -423,7 +412,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(true),
       },
     });
 
@@ -463,7 +451,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(true),
       },
     });
 
@@ -501,7 +488,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(false),
       },
     });
 
@@ -535,7 +521,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(true),
       },
     });
 
@@ -572,7 +557,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(false),
       },
     });
 
@@ -607,7 +591,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(false),
       },
     });
 
@@ -641,7 +624,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(false),
       },
     });
 
@@ -680,7 +662,6 @@ describe('.dest() with symlinks', function() {
       contents: null,
       stat: {
         isSymbolicLink: isSymbolicLink(true),
-        isDirectory: isDirectory(false),
       },
     });
 
