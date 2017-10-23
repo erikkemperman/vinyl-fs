@@ -83,7 +83,7 @@ describe('integrations', function() {
       vfs.dest(outputDirpath),
       concat(assert),
     ], done);
-  });
+  });// How does github determine this?
 
   it('(windows) sources a directory, creates a junction and copies it', function(done) {
     if (!isWindows) {
@@ -109,7 +109,7 @@ describe('integrations', function() {
       vfs.dest(outputDirpath),
       concat(assert),
     ], done);
-  });
+  });// Comment to hide the inline github comment
 
   it('(*nix) sources a symlink and copies it', function(done) {
     if (isWindows) {
