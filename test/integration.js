@@ -125,6 +125,32 @@ describe('integrations', function() {
       var destResult = fs.readlinkSync(outputDirpathSymlink);
 
       expect(destResult).toEqual(inputDirpath);
+      expect(files[0].isSymbolic()).toEqual(true);
+      expect(files[0].symlink).toEqual(inputDirpath);
+    }
+
+    pipe([
+      vfs.src(outputSymlink, { resolveSymlinks: false }),
+      vfs.dest(outputDirpath),
+      concat(assert),
+    ], done);
+  });
+
+  it('(windows) sources a directory symlink and copies it', function(done) {
+    if (!isWindows) {
+      this.skip();
+      return;
+    }
+
+    fs.mkdirSync(base);
+    fs.mkdirSync(symlinkDirpath);
+    fs.symlinkSync(inputDirpath, outputSymlink, 'dir');
+
+    function assert(files) {
+      var destResult = fs.readlinkSync(outputDirpathSymlink);
+
+      expect(destResult).toEqual(inputDirpath);
+      expect(files[0].isSymbolic()).toEqual(true);
       expect(files[0].symlink).toEqual(inputDirpath);
     }
 
@@ -151,6 +177,7 @@ describe('integrations', function() {
       var destResult = fs.readlinkSync(outputDirpathSymlink);
 
       expect(destResult).toEqual(expected);
+      expect(files[0].isSymbolic()).toEqual(true);
       expect(files[0].symlink).toEqual(inputDirpath);
     }
 
