@@ -57,8 +57,7 @@ describe('.dest() with symlinks', function() {
       expect(files.length).toEqual(1);
       expect(file.symlink).toEqual(symlink);
       expect(files[0].symlink).toEqual(symlink);
-      expect(files[0].stat).toExist();
-      expect(files[0].stat.isSymbolicLink()).toBe(true);
+      expect(files[0].isSymbolic()).toBe(true);
       expect(files[0].path).toEqual(outputPath);
     }
 
@@ -161,8 +160,7 @@ describe('.dest() with symlinks', function() {
 
       expect(files.length).toEqual(1);
       expect(outputLink).toEqual(path.normalize('../fixtures/test.txt'));
-      expect(files[0].stat).toExist();
-      expect(files[0].stat.isSymbolicLink()).toBe(true);
+      expect(files[0].isSymbolic()).toBe(true);
     }
 
     pipe([

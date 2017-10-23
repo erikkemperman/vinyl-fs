@@ -35,8 +35,6 @@ var content = testConstants.content;
 
 var clean = cleanup(base);
 
-var isWindows = (os.platform() === 'win32');
-
 describe('integrations', function() {
 
   beforeEach(clean);
@@ -76,8 +74,7 @@ describe('integrations', function() {
 
       expect(symlinkResult).toEqual(inputDirpath);
       expect(destResult).toEqual(inputDirpath);
-      expect(files[0].stat).toExist();
-      expect(files[0].stat.isSymbolicLink()).toBe(true);
+      expect(files[0].isSymbolic()).toBe(true);
       expect(files[0].symlink).toEqual(inputDirpath);
     }
 
@@ -103,8 +100,7 @@ describe('integrations', function() {
 
       expect(symlinkResult).toEqual(expected);
       expect(destResult).toEqual(expected);
-      expect(files[0].stat).toExist();
-      expect(files[0].stat.isSymbolicLink()).toBe(true);
+      expect(files[0].isSymbolic()).toBe(true);
       expect(files[0].symlink).toEqual(inputDirpath);
     }
 
