@@ -109,8 +109,7 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
-      expect(files[0].stat).toExist('stat should be set');
-      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
+      expect(files[0].isSymbolic()).toBe(true, 'file should be symbolic');
       expect(outputLink).toEqual(inputPath);
     }
 
@@ -144,8 +143,7 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
-      expect(files[0].stat).toExist('stat should be set');
-      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
+      expect(files[0].isSymbolic()).toBe(true, 'file should be symbolic');
       expect(outputLink).toEqual(inputPath);
     }
 
@@ -156,7 +154,6 @@ describe('symlink stream', function() {
     ], done);
   });
 
-  // TODO: test for modes
   it('creates a link for a file with buffered contents', function(done) {
     var file = new File({
       base: inputBase,
@@ -172,8 +169,7 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
-      expect(files[0].stat).toExist('stat should be set');
-      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
+      expect(files[0].isSymbolic()).toBe(true, 'file should be symbolic');
       expect(outputLink).toEqual(inputPath);
     }
 
@@ -199,8 +195,7 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
-      expect(files[0].stat).toExist('stat should be set');
-      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
+      expect(files[0].isSymbolic()).toBe(true, 'file should be symbolic');
       expect(outputLink).toEqual(path.normalize('../fixtures/test.txt'));
     }
 
@@ -226,8 +221,7 @@ describe('symlink stream', function() {
       expect(files[0].base).toEqual(outputBase, 'base should have changed');
       expect(files[0].path).toEqual(outputPath, 'path should have changed');
       expect(files[0].symlink).toEqual(outputLink, 'symlink should be set');
-      expect(files[0].stat).toExist('stat should be set');
-      expect(files[0].stat.isSymbolicLink()).toBe(true, 'stat should be symbolic');
+      expect(files[0].isSymbolic()).toBe(true, 'file should be symbolic');
       expect(outputLink).toEqual(inputPath);
     }
 
