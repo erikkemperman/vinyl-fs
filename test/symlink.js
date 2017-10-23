@@ -12,7 +12,7 @@ var vfs = require('../');
 var cleanup = require('./utils/cleanup');
 var isWindows = require('./utils/is-windows');
 var testStreams = require('./utils/test-streams');
-var isDirectory = require('./utils/is-directory-mock');
+var always = require('./utils/always');
 var testConstants = require('./utils/test-constants');
 
 var from = miss.from;
@@ -268,7 +268,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory(true),
+        isDirectory: always(true),
       },
     });
 
@@ -305,7 +305,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory(true),
+        isDirectory: always(true),
       },
     });
 
@@ -343,7 +343,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory(true),
+        isDirectory: always(true),
       },
     });
 
@@ -380,7 +380,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory(true),
+        isDirectory: always(true),
       },
     });
 
@@ -423,7 +423,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory(true),
+        isDirectory: always(true),
       },
     });
 
@@ -460,7 +460,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory(true),
+        isDirectory: always(true),
       },
     });
 
@@ -528,7 +528,7 @@ describe('symlink stream', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isDirectory: isDirectory(true),
+        isDirectory: always(true),
       },
     });
 

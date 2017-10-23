@@ -11,8 +11,7 @@ var vfs = require('../');
 
 var cleanup = require('./utils/cleanup');
 var isWindows = require('./utils/is-windows');
-var isDirectory = require('./utils/is-directory-mock');
-var isSymbolicLink = require('./utils/is-symbolic-link-mock');
+var always = require('./utils/always');
 var testConstants = require('./utils/test-constants');
 
 var from = miss.from;
@@ -45,7 +44,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -76,7 +75,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(false),
+        isSymbolicLink: always(false),
       },
     });
 
@@ -103,7 +102,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -125,7 +124,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -150,7 +149,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -184,7 +183,7 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -220,7 +219,7 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -257,7 +256,7 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -293,7 +292,7 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -335,7 +334,7 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -372,7 +371,7 @@ describe('.dest() with symlinks', function() {
       path: neInputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -411,7 +410,7 @@ describe('.dest() with symlinks', function() {
       path: neInputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -450,7 +449,7 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -487,7 +486,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -520,7 +519,7 @@ describe('.dest() with symlinks', function() {
       path: inputDirpath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -556,7 +555,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -590,7 +589,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -623,7 +622,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
@@ -661,7 +660,7 @@ describe('.dest() with symlinks', function() {
       path: inputPath,
       contents: null,
       stat: {
-        isSymbolicLink: isSymbolicLink(true),
+        isSymbolicLink: always(true),
       },
     });
 
