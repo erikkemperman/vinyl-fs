@@ -1,6 +1,5 @@
 'use strict';
 
-var os = require('os');
 var path = require('path');
 
 var fs = require('graceful-fs');
@@ -110,7 +109,7 @@ describe('integrations', function() {
       vfs.dest(outputDirpath),
       concat(assert),
     ], done);
-  });
+  });// Comment to hide the inline github comment
 
   it('(*nix) sources a symlink and copies it', function(done) {
     if (isWindows) {
