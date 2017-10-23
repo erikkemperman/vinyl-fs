@@ -83,7 +83,7 @@ describe('integrations', function() {
       vfs.dest(outputDirpath),
       concat(assert),
     ], done);
-  });
+  });// How does github determine this?
 
   it('(windows) sources a directory, creates a junction and copies it', function(done) {
     if (!isWindows) {
