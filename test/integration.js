@@ -147,9 +147,11 @@ describe('integrations', function() {
     fs.symlinkSync(inputDirpath, outputSymlink, 'dir');
 
     function assert(files) {
+      // 'dir' symlinks add an ending separator
+      var expected = inputDirpath + path.sep;
       var destResult = fs.readlinkSync(outputDirpathSymlink);
 
-      expect(destResult).toEqual(inputDirpath);
+      expect(destResult).toEqual(expected);
       expect(files[0].isSymbolic()).toEqual(true);
       expect(files[0].symlink).toEqual(inputDirpath);
     }
