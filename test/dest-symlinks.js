@@ -357,7 +357,6 @@ describe('.dest() with symlinks', function() {
     ], done);
   });
 
-  // This could also be from a different Vinyl adapter
   it('(*nix) receives a virtual symbolic directory and creates a symlink', function(done) {
     if (isWindows) {
       this.skip();
@@ -382,22 +381,23 @@ describe('.dest() with symlinks', function() {
       var linkTargetExists = fs.existsSync(outputLink);
 
       expect(files.length).toEqual(1);
-      // TODO: Am I testing all the correct stuff here?
       expect(outputLink).toEqual(neInputDirpath);
       expect(linkTargetExists).toEqual(false);
-      expect(lstats.isDirectory()).toEqual(false);
       expect(lstats.isSymbolicLink()).toEqual(true);
     }
 
     pipe([
+      // This could also be from a different Vinyl adapter
       from.obj([file]),
       vfs.dest(neOutputBase),
       concat(assert),
     ], done);
   });
 
-  // This could also be from a different Vinyl adapter
-  it('(windows) receives a virtual symbolic directory and creates a junction', function(done) {
+  // There's no way to determine the proper type of link to create with a dangling link
+  // So we just create a 'file' type symlink
+  // There's also no real way to test the type that was created
+  it('(windows) receives a virtual symbolic directory and creates a symlink', function(done) {
     if (!isWindows) {
       this.skip();
       return;
@@ -421,15 +421,13 @@ describe('.dest() with symlinks', function() {
       var linkTargetExists = fs.existsSync(outputLink);
 
       expect(files.length).toEqual(1);
-      // When creating a junction, it seems Windows appends a separator
-      // TODO: Am I testing all the correct stuff here?
-      expect(outputLink).toEqual(neInputDirpath + path.sep);
+      expect(outputLink).toEqual(neInputDirpath);
       expect(linkTargetExists).toEqual(false);
-      expect(lstats.isDirectory()).toEqual(false);
       expect(lstats.isSymbolicLink()).toEqual(true);
     }
 
     pipe([
+      // This could also be from a different Vinyl adapter
       from.obj([file]),
       vfs.dest(neOutputBase),
       concat(assert),
