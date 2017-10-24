@@ -9,8 +9,6 @@ var miss = require('mississippi');
 
 var vfs = require('../');
 
-var LINK_MODE = require('../lib/constants').LINK_MODE;
-
 var cleanup = require('./utils/cleanup');
 var isWindows = require('./utils/is-windows');
 var always = require('./utils/always');
@@ -119,7 +117,7 @@ describe('.dest() with symlinks', function() {
     ], assert);
   });
 
-  it('emits Vinyl files that are symbolic', function(done) {
+  it('emits Vinyl files that are (still) symbolic', function(done) {
     var file = new File({
       base: inputBase,
       path: inputPath,
@@ -135,8 +133,6 @@ describe('.dest() with symlinks', function() {
     function assert(files) {
       expect(files.length).toEqual(1);
       expect(files[0].isSymbolic()).toEqual(true);
-      // We can't trust isSymbolic() because stat.isSymbolicLink() was mocked
-      expect(files[0].stat.mode).toEqual(LINK_MODE);
     }
 
     pipe([
