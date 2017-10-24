@@ -31,6 +31,7 @@ var getOwnerDiff = fo.getOwnerDiff;
 var isValidUnixId = fo.isValidUnixId;
 var isFatalOverwriteError = fo.isFatalOverwriteError;
 var isFatalUnlinkError = fo.isFatalUnlinkError;
+var reflectMetadata = fo.reflectMetadata;
 var updateMetadata = fo.updateMetadata;
 var createWriteStream = fo.createWriteStream;
 
@@ -41,7 +42,9 @@ var string = testStreams.string;
 
 var outputBase = testConstants.outputBase;
 var inputPath = testConstants.inputPath;
+var neInputDirpath = testConstants.neInputDirpath;
 var outputPath = testConstants.outputPath;
+var symlinkPath = testConstants.symlinkDirpath;
 var contents = testConstants.contents;
 
 var clean = cleanup(outputBase);
@@ -889,6 +892,58 @@ describe('writeFile', function() {
       expect(typeof fd === 'number').toEqual(true);
 
       fs.close(fd, done);
+    });
+  });
+});
+
+describe('reflectMetadata', function() {
+
+  beforeEach(clean);
+  afterEach(clean);
+
+  beforeEach(function(done) {
+    mkdirp(outputBase, done);
+  });
+
+  it('passes the error if lstat fails', function(done) {
+
+    var file = new File();
+
+    reflectMetadata(neInputDirpath, file, function(err) {
+      expect(err).toExist();
+
+      done();
+    });
+  });
+
+  it('updates the vinyl object with regular fs stats', function(done) {
+    var file = new File();
+
+    var stats = fs.lstatSync(inputPath);
+
+    reflectMetadata(inputPath, file, function() {
+      // Not sure why .toEqual doesn't match these
+      Object.keys(file.stat).forEach(function(key) {
+        expect(file.stat[key]).toEqual(stats[key]);
+      });
+
+      done();
+    });
+  });
+
+  it('updates the vinyl object with symbolic fs stats', function(done) {
+    var file = new File();
+
+    fs.symlinkSync(inputPath, symlinkPath);
+    var stats = fs.lstatSync(symlinkPath);
+
+    reflectMetadata(symlinkPath, file, function() {
+      // Not sure why .toEqual doesn't match these
+      Object.keys(file.stat).forEach(function(key) {
+        expect(file.stat[key]).toEqual(stats[key]);
+      });
+
+      done();
     });
   });
 });
