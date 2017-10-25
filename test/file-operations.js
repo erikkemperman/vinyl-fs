@@ -905,42 +905,54 @@ describe('reflectMetadata', function() {
     mkdirp(outputBase, done);
   });
 
-  it('passes the error if lstat fails', function(done) {
+  it('passes the error if lstat fails (resolveSymlinks false)', function(done) {
 
     var file = new File();
 
-    reflectMetadata(neInputDirpath, file, function(err) {
+    reflectMetadata(false, neInputDirpath, file, function(err) {
       expect(err).toExist();
 
       done();
     });
   });
 
-  it('updates the vinyl object with regular fs stats', function(done) {
+  it('passes the error if stat fails (resolveSymlinks true)', function(done) {
+
     var file = new File();
 
-    var stats = fs.lstatSync(inputPath);
+    reflectMetadata(true, neInputDirpath, file, function(err) {
+      expect(err).toExist();
 
-    reflectMetadata(inputPath, file, function() {
+      done();
+    });
+  });
+
+  it('updates the vinyl with filesystem stats (resolveSymlinks true)', function(done) {
+    var file = new File();
+
+    fs.symlinkSync(inputPath, symlinkPath);
+    var stat = fs.statSync(symlinkPath);
+
+    reflectMetadata(true, symlinkPath, file, function() {
       // Not sure why .toEqual doesn't match these
       Object.keys(file.stat).forEach(function(key) {
-        expect(file.stat[key]).toEqual(stats[key]);
+        expect(file.stat[key]).toEqual(stat[key]);
       });
 
       done();
     });
   });
 
-  it('updates the vinyl object with symbolic fs stats', function(done) {
+  it('updates the vinyl with filesystem fs stats (resolveSymlinks false)', function(done) {
     var file = new File();
 
     fs.symlinkSync(inputPath, symlinkPath);
-    var stats = fs.lstatSync(symlinkPath);
+    var stat = fs.lstatSync(symlinkPath);
 
-    reflectMetadata(symlinkPath, file, function() {
+    reflectMetadata(false, symlinkPath, file, function() {
       // Not sure why .toEqual doesn't match these
       Object.keys(file.stat).forEach(function(key) {
-        expect(file.stat[key]).toEqual(stats[key]);
+        expect(file.stat[key]).toEqual(stat[key]);
       });
 
       done();
