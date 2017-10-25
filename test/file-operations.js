@@ -936,7 +936,13 @@ describe('reflectMetadata', function() {
     reflectMetadata(true, symlinkPath, file, function() {
       // Not sure why .toEqual doesn't match these
       Object.keys(file.stat).forEach(function(key) {
-        expect(file.stat[key]).toEqual(stat[key]);
+        // There appears to be a bug in the Windows implementation which causes
+        // the sync versions of stat and lstat to return unsigned 32-bit ints
+        // whilst the async versions returns signed 32-bit ints... This affects
+        // dev but possibly others as well?
+        if (!isWindows || key !== 'dev') {
+          expect(file.stat[key]).toEqual(stat[key]);
+        }
       });
 
       done();
@@ -952,7 +958,13 @@ describe('reflectMetadata', function() {
     reflectMetadata(false, symlinkPath, file, function() {
       // Not sure why .toEqual doesn't match these
       Object.keys(file.stat).forEach(function(key) {
-        expect(file.stat[key]).toEqual(stat[key]);
+        // There appears to be a bug in the Windows implementation which causes
+        // the sync versions of stat and lstat to return unsigned 32-bit ints
+        // whilst the async versions returns signed 32-bit ints... This affects
+        // dev but possibly others as well?
+        if (!isWindows || key !== 'dev') {
+          expect(file.stat[key]).toEqual(stat[key]);
+        }
       });
 
       done();
